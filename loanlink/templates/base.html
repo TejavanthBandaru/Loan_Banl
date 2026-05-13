@@ -67,14 +67,18 @@
   <div class="container">
 
     <!-- Brand -->
-    <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
-      <div class="brand-icon">
-        <i class="fa-solid fa-landmark"></i>
-      </div>
-      <div>
-        <span class="brand-main">LoanLink</span>
-        <span class="brand-sub d-block">Hyderabad</span>
-      </div>
+    <a class="navbar-brand d-flex align-items-center gap-3"
+      href="{{ url_for('home') }}">
+
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}"
+            alt="LoanLink Hyderabad Logo"
+            class="main-logo">
+
+        <div class="brand-text">
+            <span class="brand-main">LoanLink</span>
+            <span class="brand-sub">Hyderabad</span>
+        </div>
+
     </a>
 
     <!-- Toggler -->

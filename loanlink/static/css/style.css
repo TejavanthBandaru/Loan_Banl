@@ -907,3 +907,30 @@ select.form-control-custom { cursor: pointer; }
   .whatsapp-float { bottom: 18px; right: 18px; width: 50px; height: 50px; }
   .scroll-top-btn { right: 18px; bottom: 80px; }
 }
+
+
+
+.main-logo{
+    height: 55px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.brand-text{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-main{
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.brand-sub{
+    color: #d1d5db;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
