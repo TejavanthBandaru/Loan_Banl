@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Contact LoanLink Hyderabad – Apply for a Loan{% endblock %}
+{% block meta_desc %}Contact LoanLink Hyderabad to apply for a personal, education, wedding or emergency loan. Fill our quick enquiry form and get a callback within 2 hours.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container text-center">
+    <h1 class="page-hero-title" data-aos="fade-up">Contact Us</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Contact Info Column -->
+      <div class="col-lg-4" data-aos="fade-right">
+        <span class="section-badge">Get in Touch</span>
+        <h2 class="section-title">We're Here to Help</h2>
+        <p class="section-text">
+          Have questions? Want to apply? Our loan advisors are available to guide you
+          through every step of the process.
+        </p>
+
+        <div class="contact-info-list mt-4">
+          <div class="contact-info-item">
+            <div class="ci-icon red"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <h6>Call Us</h6>
+              <a href="tel:+919550131314">+91 9550131314</a>
+              <small class="d-block text-muted">Mon–Sat: 10 AM – 7 PM</small>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon navy"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <h6>Email Us</h6>
+              <a href="mailto:info@loanlinkhyderabad.com">info@loanlinkhyderabad.com</a>
+              <small class="d-block text-muted">Response within 4 hours</small>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon red"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <h6>Visit Us</h6>
+              <span>3rd Floor, Kondapur Main Road,<br>Hyderabad – 500084</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon navy"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <h6>WhatsApp</h6>
+              <a href="https://wa.me/919550131314" target="_blank">Chat with us</a>
+              <small class="d-block text-muted">Instant response during work hours</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="mt-4">
+          <h6 class="fw-bold mb-3">Follow Us</h6>
+          <div class="d-flex gap-3">
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enquiry Form -->
+      <div class="col-lg-8" data-aos="fade-left">
+        <div class="contact-form-card">
+          <div class="cform-header">
+            <h4><i class="fa-solid fa-file-pen me-2"></i>Loan Enquiry Form</h4>
+            <p>Fill in your details and our team will call you within 2 hours.</p>
+          </div>
+
+          <form method="POST" action="{{ url_for('contact') }}" novalidate id="loanForm">
+
+            <div class="row g-3">
+
+              <!-- Name -->
+              <div class="col-md-6">
+                <label class="form-label" for="name">
+                  Full Name <span class="text-red">*</span>
+                </label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-user"></i>
+                  <input type="text" class="form-control-custom" id="name" name="name"
+                         placeholder="Your full name"
+                         value="{{ form_data.get('name', '') }}" required />
+                </div>
+              </div>
+
+              <!-- Phone -->
+              <div class="col-md-6">
+                <label class="form-label" for="phone">
+                  Phone Number <span class="text-red">*</span>
+                </label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-phone"></i>
+                  <input type="tel" class="form-control-custom" id="phone" name="phone"
+                         placeholder="10-digit mobile number"
+                         value="{{ form_data.get('phone', '') }}" required />
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6">
+                <label class="form-label" for="email">Email Address</label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-envelope"></i>
+                  <input type="email" class="form-control-custom" id="email" name="email"
+                         placeholder="your@email.com"
+                         value="{{ form_data.get('email', '') }}" />
+                </div>
+              </div>
+
+              <!-- Loan Amount -->
+              <div class="col-md-6">
+                <label class="form-label" for="loan_amount">Loan Amount Required</label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-indian-rupee-sign"></i>
+                  <input type="text" class="form-control-custom" id="loan_amount" name="loan_amount"
+                         placeholder="e.g. ₹2,00,000"
+                         value="{{ form_data.get('loan_amount', '') }}" />
+                </div>
+              </div>
+
+              <!-- Loan Type -->
+              <div class="col-md-12">
+                <label class="form-label" for="loan_type">Type of Loan</label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-list"></i>
+                  <select class="form-control-custom" id="loan_type" name="loan_type">
+                    <option value="" disabled
+                      {% if not form_data.get('loan_type') %}selected{% endif %}>
+                      Select loan type…
+                    </option>
+                    {% for lt in ['Personal Loan', 'Education Loan', 'Wedding Loan',
+                                  'Emergency Loan', 'Debt Consolidation', 'Other'] %}
+                    <option value="{{ lt }}"
+                      {% if form_data.get('loan_type') == lt %}selected{% endif %}>
+                      {{ lt }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="col-12">
+                <label class="form-label" for="message">Additional Message</label>
+                <div class="input-group-custom textarea-wrap">
+                  <i class="fa-solid fa-comment-dots"></i>
+                  <textarea class="form-control-custom" id="message" name="message"
+                            rows="4" placeholder="Tell us a bit about your requirement…">{{ form_data.get('message', '') }}</textarea>
+                </div>
+              </div>
+
+              <!-- Privacy note -->
+              <div class="col-12">
+                <p class="form-privacy">
+                  <i class="fa-solid fa-lock me-1"></i>
+                  Your information is 100% secure and will never be shared with third parties.
+                </p>
+              </div>
+
+              <!-- Submit -->
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary-custom btn-lg w-100" id="submitBtn">
+                  <span id="btnText">
+                    <i class="fa-solid fa-paper-plane me-2"></i> Submit Enquiry
+                  </span>
+                  <span id="btnLoader" style="display:none;">
+                    <span class="spinner-border spinner-border-sm me-2"></span> Submitting…
+                  </span>
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map Placeholder -->
+<section class="map-section">
+  <div class="container-fluid p-0">
+    <div class="map-wrapper">
+      <iframe
+        src="https://maps.google.com/maps?q=Kondapur+Hyderabad&output=embed"
+        width="100%" height="380" style="border:0;" allowfullscreen=""
+        loading="lazy" title="LoanLink Hyderabad Office Location">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Show loading spinner on submit
+document.getElementById('loanForm').addEventListener('submit', function () {
+  document.getElementById('btnText').style.display   = 'none';
+  document.getElementById('btnLoader').style.display = 'inline-block';
+});
+</script>
+{% endblock %}

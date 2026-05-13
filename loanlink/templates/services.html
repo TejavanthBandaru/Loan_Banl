@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Loan Services – Personal, Education, Wedding & Emergency Loans{% endblock %}
+{% block meta_desc %}Explore all loan products offered by LoanLink Hyderabad: Personal, Education, Wedding, Emergency loans and Debt Consolidation at competitive rates.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container text-center">
+    <h1 class="page-hero-title" data-aos="fade-up">Our Loan Services</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Services</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Services Detail -->
+{% set services = [
+  (
+    'Personal Loans', 'fa-wallet', 'red',
+    'Whether it\'s a medical emergency, home renovation, travel, or simply consolidating expenses — our Personal Loan gives you the flexibility and speed you need.',
+    [
+      ('Loan Amount', '₹10,000 – ₹20,00,000'),
+      ('Interest Rate', 'Starting at 10.5% p.a.'),
+      ('Tenure', '12 to 60 months'),
+      ('Processing Fee', '1–2% of loan amount'),
+      ('Approval Time', 'Within 24 hours'),
+      ('Collateral', 'Not required'),
+    ],
+    ['Salaried employees', 'Self-employed professionals', 'Min. income ₹15,000/month', 'Age 21–58 years', 'Good credit history preferred'],
+    'personal'
+  ),
+  (
+    'Education Loans', 'fa-graduation-cap', 'navy',
+    'Invest in your greatest asset — your education. Fund tuition fees, hostel charges, books, laptops, and exam fees for colleges and universities across India.',
+    [
+      ('Loan Amount', '₹50,000 – ₹25,00,000'),
+      ('Interest Rate', 'Starting at 9.5% p.a.'),
+      ('Tenure', 'Up to 84 months'),
+      ('Moratorium', 'Course duration + 6 months'),
+      ('Approval Time', '48 hours'),
+      ('Collateral', 'Not required up to ₹7.5L'),
+    ],
+    ['Student (or parent as co-applicant)', 'Admission to recognised institution', 'Age 18–35 years', 'Co-applicant with steady income'],
+    'education'
+  ),
+  (
+    'Wedding Loans', 'fa-rings-wedding', 'red',
+    'Your special day deserves to be special — not compromised by budget constraints. Finance venue, catering, jewellery, photography, and more with our Wedding Loan.',
+    [
+      ('Loan Amount', '₹1,00,000 – ₹15,00,000'),
+      ('Interest Rate', 'Starting at 11% p.a.'),
+      ('Tenure', '12 to 48 months'),
+      ('Processing Fee', '1.5% of loan amount'),
+      ('Approval Time', '24–36 hours'),
+      ('Collateral', 'Not required'),
+    ],
+    ['Salaried or self-employed', 'Age 21–55 years', 'Min. monthly income ₹20,000', 'Valid KYC documents'],
+    'wedding'
+  ),
+  (
+    'Emergency Loans', 'fa-siren-on', 'navy',
+    'Life is unpredictable. When a medical crisis, accident, or urgent repair strikes, our Emergency Loan delivers funds to your account within hours — not days.',
+    [
+      ('Loan Amount', '₹10,000 – ₹5,00,000'),
+      ('Interest Rate', 'Starting at 12% p.a.'),
+      ('Tenure', '3 to 24 months'),
+      ('Processing Fee', 'Minimal / waived on urgency'),
+      ('Approval Time', 'As fast as 2–4 hours'),
+      ('Collateral', 'Not required'),
+    ],
+    ['Any salaried or self-employed individual', 'Valid Aadhaar & PAN', 'Active bank account', 'Age 21–60 years'],
+    'emergency'
+  ),
+  (
+    'Debt Consolidation', 'fa-layer-group', 'red',
+    'Multiple EMIs draining your wallet? Combine all your existing high-interest loans into a single, manageable monthly payment at a lower interest rate.',
+    [
+      ('Loan Amount', '₹1,00,000 – ₹30,00,000'),
+      ('Interest Rate', 'Starting at 10% p.a.'),
+      ('Tenure', '24 to 60 months'),
+      ('Processing Fee', '1% of loan amount'),
+      ('Approval Time', '48–72 hours'),
+      ('Collateral', 'Not required'),
+    ],
+    ['Existing loan repayment history', 'Salaried or self-employed', 'Min. income ₹25,000/month', 'CIBIL score 650+'],
+    'debt'
+  ),
+] %}
+
+{% for name, icon, color, desc, details, eligibility, anchor in services %}
+<section class="section-pad {% if loop.index is even %}bg-light-gray{% endif %}" id="{{ anchor }}">
+  <div class="container">
+    <div class="row g-5 align-items-center {% if loop.index is even %}flex-row-reverse{% endif %}">
+      <div class="col-lg-5" data-aos="{% if loop.index is even %}fade-left{% else %}fade-right{% endif %}">
+        <div class="service-visual {{ color }}">
+          <i class="fa-solid {{ icon }}"></i>
+          <div class="service-visual-ring"></div>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="{% if loop.index is even %}fade-right{% else %}fade-left{% endif %}">
+        <span class="section-badge">Loan Product</span>
+        <h2 class="section-title">{{ name }}</h2>
+        <p class="section-text">{{ desc }}</p>
+
+        <!-- Details Grid -->
+        <div class="service-details-grid mt-4">
+          {% for label, value in details %}
+          <div class="sd-item">
+            <span class="sd-label">{{ label }}</span>
+            <span class="sd-value">{{ value }}</span>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Eligibility -->
+        <h6 class="mt-4 mb-2 fw-bold">Quick Eligibility</h6>
+        <ul class="eligibility-checklist">
+          {% for item in eligibility %}
+          <li><i class="fa-solid fa-circle-check text-red me-2"></i>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('contact') }}" class="btn btn-primary-custom mt-3">
+          Apply for {{ name }} <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <h3 class="text-white mb-1">Have a question about any loan?</h3>
+      <p class="text-white opacity-75 mb-0">Our advisors are available Mon–Sat, 10 AM – 7 PM.</p>
+    </div>
+    <div class="d-flex gap-3 flex-wrap">
+      <a href="{{ url_for('contact') }}" class="btn btn-white-solid">Apply Now</a>
+      <a href="tel:+919550131314" class="btn btn-white-outline">
+        <i class="fa-solid fa-phone me-1"></i> Call Us
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

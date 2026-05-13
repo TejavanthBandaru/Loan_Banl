@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO Meta ── -->
+  <title>{% block title %}{{ company_name }} – Fast Loans in Hyderabad{% endblock %}</title>
+  <meta name="description"
+        content="{% block meta_desc %}LoanLink Hyderabad offers instant Personal, Education, Wedding & Emergency loans at competitive rates. Apply online today!{% endblock %}" />
+  <meta name="keywords"
+        content="personal loan hyderabad, education loan, emergency loan, wedding loan, debt consolidation, LoanLink" />
+  <meta name="author" content="LoanLink Hyderabad" />
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:title"       content="{{ company_name }}" />
+  <meta property="og:description" content="Fast, hassle-free loans in Hyderabad." />
+  <meta property="og:type"        content="website" />
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}" />
+
+  <!-- ── Bootstrap 5 ── -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+  <!-- ── Font Awesome 6 ── -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- ── Google Fonts: Playfair Display + DM Sans ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+  <!-- ── Global CSS ── -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TOP INFO BAR
+════════════════════════════════════════════════════════════════ -->
+<div class="topbar d-none d-md-block">
+  <div class="container d-flex justify-content-between align-items-center py-1">
+    <span class="topbar-item">
+      <i class="fa-regular fa-clock me-1"></i> {{ working_hours }}
+    </span>
+    <div class="d-flex gap-4">
+      <a href="tel:{{ company_phone }}" class="topbar-item">
+        <i class="fa-solid fa-phone me-1"></i> {{ company_phone }}
+      </a>
+      <a href="mailto:{{ company_email }}" class="topbar-item">
+        <i class="fa-solid fa-envelope me-1"></i> {{ company_email }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     STICKY NAVBAR
+════════════════════════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('home') }}">
+      <div class="brand-icon">
+        <i class="fa-solid fa-landmark"></i>
+      </div>
+      <div>
+        <span class="brand-main">LoanLink</span>
+        <span class="brand-sub d-block">Hyderabad</span>
+      </div>
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler border-0" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item">
+          <a class="nav-link {% if page == 'home' %}active{% endif %}"
+             href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if page == 'about' %}active{% endif %}"
+             href="{{ url_for('about') }}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if page == 'services' %}active{% endif %}"
+             href="{{ url_for('services') }}">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if page == 'eligibility' %}active{% endif %}"
+             href="{{ url_for('eligibility') }}">Eligibility</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if page == 'contact' %}active{% endif %}"
+             href="{{ url_for('contact') }}">Contact</a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-cta-nav" href="{{ url_for('contact') }}">
+            Apply Now <i class="fa-solid fa-arrow-right ms-1"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FLASH MESSAGES
+════════════════════════════════════════════════════════════════ -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          <i class="fa-solid {% if category == 'success' %}fa-circle-check{% else %}fa-triangle-exclamation{% endif %} me-2"></i>
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PAGE CONTENT
+════════════════════════════════════════════════════════════════ -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Brand Column -->
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand mb-3">
+            <i class="fa-solid fa-landmark me-2"></i>
+            LoanLink <span>Hyderabad</span>
+          </div>
+          <p class="footer-tagline">
+            Your trusted financial partner for fast, transparent, and affordable loans in Hyderabad.
+          </p>
+          <div class="footer-socials mt-3 d-flex gap-3">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/{{ whatsapp_number }}" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="footer-heading">Quick Links</h6>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('eligibility') }}">Eligibility</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Loan Types -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="footer-heading">Our Loans</h6>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('services') }}">Personal Loans</a></li>
+            <li><a href="{{ url_for('services') }}">Education Loans</a></li>
+            <li><a href="{{ url_for('services') }}">Wedding Loans</a></li>
+            <li><a href="{{ url_for('services') }}">Emergency Loans</a></li>
+            <li><a href="{{ url_for('services') }}">Debt Consolidation</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-4 col-md-6">
+          <h6 class="footer-heading">Get in Touch</h6>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>{{ company_address }}</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:{{ company_phone }}">{{ company_phone }}</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:{{ company_email }}">{{ company_email }}</a>
+            </li>
+            <li>
+              <i class="fa-regular fa-clock"></i>
+              <span>{{ working_hours }}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-0">
+        &copy; {{ year }} {{ company_name }}. All rights reserved.
+      </p>
+      <p class="mb-0 mt-2 mt-md-0">
+        <small>Loans subject to eligibility &amp; approval. Terms &amp; conditions apply.</small>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WHATSAPP FLOATING BUTTON
+════════════════════════════════════════════════════════════════ -->
+<a href="https://wa.me/{{ whatsapp_number }}?text=Hello!%20I%20am%20interested%20in%20a%20loan%20from%20LoanLink%20Hyderabad."
+   class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-label">Chat with us</span>
+</a>
+
+<!-- ── Scroll To Top ── -->
+<button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!-- ── Page Loader ── -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <div class="loader-logo"><i class="fa-solid fa-landmark"></i></div>
+    <div class="loader-bar"><span></span></div>
+  </div>
+</div>
+
+<!-- ── Bootstrap JS ── -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ── Global JS ── -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

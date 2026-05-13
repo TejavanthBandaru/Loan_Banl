@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}About LoanLink Hyderabad – Our Story & Mission{% endblock %}
+{% block meta_desc %}Learn about LoanLink Hyderabad – a trusted local loan company dedicated to providing fast and fair financial solutions to people of Hyderabad.{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="page-hero">
+  <div class="container text-center">
+    <h1 class="page-hero-title" data-aos="fade-up">About Us</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">About</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Our Story -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="about-img-wrap">
+          <div class="about-img-card primary">
+            <i class="fa-solid fa-landmark fa-5x"></i>
+          </div>
+          <div class="about-badge">
+            <span class="badge-num">10+</span>
+            <span class="badge-txt">Years of<br>Trust</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left">
+        <span class="section-badge">Our Story</span>
+        <h2 class="section-title">Born in Hyderabad. Built for Hyderabad.</h2>
+        <p class="section-text">
+          LoanLink Hyderabad was founded with a simple but powerful idea: every hardworking
+          resident of Hyderabad deserves access to fast, fair, and transparent credit —
+          regardless of their background.
+        </p>
+        <p class="section-text">
+          Over the past decade, we've helped more than 10,000 families fund their
+          education, celebrate weddings, handle emergencies, and achieve their dreams —
+          all without the complexity and delays of traditional banking.
+        </p>
+        <div class="row g-3 mt-3">
+          <div class="col-sm-6">
+            <div class="about-value-box">
+              <i class="fa-solid fa-heart-pulse text-red me-2"></i>
+              <span>Customer-first always</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="about-value-box">
+              <i class="fa-solid fa-eye text-red me-2"></i>
+              <span>Full transparency</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="about-value-box">
+              <i class="fa-solid fa-bolt text-red me-2"></i>
+              <span>Speed & efficiency</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="about-value-box">
+              <i class="fa-solid fa-handshake text-red me-2"></i>
+              <span>Ethical lending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="section-pad bg-light-gray">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6" data-aos="fade-up">
+        <div class="mv-card mission">
+          <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h4>Our Mission</h4>
+          <p>
+            To empower every Hyderabadi with accessible, transparent, and responsible
+            financial solutions that help them achieve their aspirations without
+            unnecessary burden or confusion.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="mv-card vision">
+          <div class="mv-icon"><i class="fa-solid fa-telescope"></i></div>
+          <h4>Our Vision</h4>
+          <p>
+            To become Telangana's most trusted personal finance company — known
+            for speed, fairness, and a genuine commitment to our customers'
+            financial well-being.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge">What We Stand For</span>
+      <h2 class="section-title">Our Core Values</h2>
+    </div>
+    <div class="row g-4">
+      {% set values = [
+        ('fa-hand-holding-heart', 'Empathy', 'red', 'We listen first. Every loan request is a person with a real need, and we treat it that way.'),
+        ('fa-scale-balanced', 'Integrity', 'navy', 'Honest rates, clear terms, and zero hidden fees — always.'),
+        ('fa-rocket', 'Speed', 'red', 'Decisions in hours, not weeks. We respect your time.'),
+        ('fa-users-gear', 'Responsibility', 'navy', 'We lend only what you can comfortably repay. Sustainable finance matters.'),
+      ] %}
+      {% for icon, title, color, desc in values %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="value-card text-center">
+          <div class="value-icon {{ color }}"><i class="fa-solid {{ icon }}"></i></div>
+          <h5 class="mt-3">{{ title }}</h5>
+          <p class="text-muted">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <h3 class="text-white mb-1">Join 10,000+ happy customers</h3>
+      <p class="text-white opacity-75 mb-0">Apply for your loan today — simple, fast, transparent.</p>
+    </div>
+    <a href="{{ url_for('contact') }}" class="btn btn-white-solid">
+      Get Started <i class="fa-solid fa-arrow-right ms-1"></i>
+    </a>
+  </div>
+</section>
+
+{% endblock %}

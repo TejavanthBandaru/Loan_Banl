@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% block title %}Loan Eligibility – Check Your Loan Eligibility | LoanLink Hyderabad{% endblock %}
+{% block meta_desc %}Check loan eligibility criteria, required documents, and application process for all loan types at LoanLink Hyderabad.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container text-center">
+    <h1 class="page-hero-title" data-aos="fade-up">Eligibility Criteria</h1>
+    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+      <ol class="breadcrumb justify-content-center">
+        <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="breadcrumb-item active">Eligibility</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- General Eligibility -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge">Who Can Apply</span>
+      <h2 class="section-title">General Eligibility Criteria</h2>
+      <p class="section-sub">Our loans are designed to be accessible. Here's who qualifies.</p>
+    </div>
+
+    <div class="row g-4">
+      {% set criteria = [
+        ('fa-user-tie', 'Salaried Employees',
+         [('Age', '21 – 58 years'), ('Min. Salary', '₹15,000/month take-home'),
+          ('Employment', 'Min. 6 months at current job'), ('CIBIL Score', '700+ preferred')]),
+        ('fa-store', 'Self-Employed',
+         [('Age', '25 – 60 years'), ('Min. Income', '₹20,000/month'),
+          ('Business Vintage', 'Min. 2 years in operation'), ('ITR', 'Last 2 years filed')]),
+        ('fa-graduation-cap', 'Students (Education Loan)',
+         [('Age', '18 – 35 years'), ('Admission', 'Confirmed at recognised institution'),
+          ('Co-applicant', 'Parent/Guardian required'), ('Course', 'Graduate / Post-graduate')]),
+      ] %}
+      {% for icon, type, items in criteria %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
+        <div class="elig-card h-100">
+          <div class="elig-card-header">
+            <i class="fa-solid {{ icon }}"></i>
+            <h5>{{ type }}</h5>
+          </div>
+          <ul class="elig-list mt-3">
+            {% for label, value in items %}
+            <li>
+              <span class="elig-label">{{ label }}</span>
+              <span class="elig-value">{{ value }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+          <a href="{{ url_for('contact') }}" class="btn btn-outline-apply w-100 mt-3">
+            Check My Eligibility <i class="fa-solid fa-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Documents Required -->
+<section class="section-pad bg-light-gray">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge">Documents Needed</span>
+      <h2 class="section-title">Keep These Ready</h2>
+      <p class="section-sub">Minimal paperwork. Maximum speed.</p>
+    </div>
+
+    <div class="row g-4">
+      {% set doc_groups = [
+        ('fa-id-card', 'Identity & Address Proof',
+         ['Aadhaar Card (mandatory)', 'PAN Card (mandatory)', 'Passport / Voter ID (any one)', 'Utility Bill (electricity / gas)'],
+         'red'),
+        ('fa-building-columns', 'Income & Financial Proof',
+         ['Last 3 months salary slips', 'Last 6 months bank statement', 'Form 16 / ITR (last 2 years)', 'Offer letter (for new employees)'],
+         'navy'),
+        ('fa-camera', 'Photographs',
+         ['2 recent passport-size photos', 'Signature specimen', 'Digital photo (for online KYC)'],
+         'red'),
+        ('fa-file-contract', 'Loan-Specific Documents',
+         ['Admission letter (Education Loan)', 'Wedding card or quotation (Wedding Loan)', 'Medical bill/report (Emergency Loan)', 'Existing loan statements (Debt Consolidation)'],
+         'navy'),
+      ] %}
+      {% for icon, title, docs, color in doc_groups %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="doc-card h-100">
+          <div class="doc-icon {{ color }}"><i class="fa-solid {{ icon }}"></i></div>
+          <h6 class="doc-title">{{ title }}</h6>
+          <ul class="doc-list">
+            {% for doc in docs %}
+            <li><i class="fa-solid fa-check me-2"></i>{{ doc }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="alert doc-note mt-4" data-aos="fade-up">
+      <i class="fa-solid fa-circle-info me-2"></i>
+      <strong>Note:</strong> Exact documents may vary based on loan type and amount. Our team will guide you through the process. All documents are handled securely and confidentially.
+    </div>
+  </div>
+</section>
+
+<!-- Loan Process Steps -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-header text-center mb-5" data-aos="fade-up">
+      <span class="section-badge">How It Works</span>
+      <h2 class="section-title">The Application Process</h2>
+    </div>
+
+    <div class="process-timeline">
+      {% set steps = [
+        ('1', 'fa-clipboard-list', 'Submit Application', 'Fill our quick online form or visit our office. Takes less than 5 minutes.', 'red'),
+        ('2', 'fa-paper-plane', 'Document Submission', 'Upload or submit your required documents. Our team will guide you.', 'navy'),
+        ('3', 'fa-magnifying-glass-chart', 'Verification & Assessment', 'Our credit team verifies your details and determines the loan offer.', 'red'),
+        ('4', 'fa-file-signature', 'Loan Sanction Letter', 'Upon approval, you receive a formal loan sanction letter with all terms.', 'navy'),
+        ('5', 'fa-money-bill-transfer', 'Disbursement', 'Sign the agreement and funds are transferred to your bank within 24 hours.', 'red'),
+      ] %}
+      {% for num, icon, title, desc, color in steps %}
+      <div class="process-step" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+        <div class="process-num {{ color }}">{{ num }}</div>
+        <div class="process-icon"><i class="fa-solid {{ icon }}"></i></div>
+        <div class="process-content">
+          <h6>{{ title }}</h6>
+          <p>{{ desc }}</p>
+        </div>
+        {% if not loop.last %}<div class="process-connector"></div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- EMI Calculator -->
+<section class="section-pad bg-light-gray">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="section-header text-center mb-4">
+          <span class="section-badge">Tools</span>
+          <h2 class="section-title">EMI Calculator</h2>
+          <p class="section-sub">Estimate your monthly payments before you apply.</p>
+        </div>
+        <div class="calc-card">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <label class="calc-label">Loan Amount (₹)</label>
+              <input type="number" class="calc-input" id="calcAmount"
+                     placeholder="e.g. 500000" value="500000" min="10000" max="3000000" />
+            </div>
+            <div class="col-md-4">
+              <label class="calc-label">Interest Rate (% p.a.)</label>
+              <input type="number" class="calc-input" id="calcRate"
+                     placeholder="e.g. 11.5" value="11.5" step="0.1" min="5" max="30" />
+            </div>
+            <div class="col-md-4">
+              <label class="calc-label">Tenure (months)</label>
+              <input type="number" class="calc-input" id="calcTenure"
+                     placeholder="e.g. 24" value="24" min="3" max="84" />
+            </div>
+          </div>
+          <button class="btn btn-primary-custom w-100 mt-4" onclick="calculateEMI()">
+            <i class="fa-solid fa-calculator me-2"></i> Calculate EMI
+          </button>
+          <div class="calc-result mt-4" id="calcResult" style="display:none;">
+            <div class="row g-3 text-center">
+              <div class="col-4">
+                <div class="result-item">
+                  <span class="result-label">Monthly EMI</span>
+                  <span class="result-value" id="resEMI">—</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="result-item">
+                  <span class="result-label">Total Interest</span>
+                  <span class="result-value" id="resInterest">—</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="result-item">
+                  <span class="result-label">Total Payable</span>
+                  <span class="result-value" id="resTotal">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <h3 class="text-white mb-1">Think you're eligible? Let's confirm it.</h3>
+      <p class="text-white opacity-75 mb-0">Free eligibility check — no credit score impact.</p>
+    </div>
+    <a href="{{ url_for('contact') }}" class="btn btn-white-solid">
+      Check Now <i class="fa-solid fa-arrow-right ms-1"></i>
+    </a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function calculateEMI() {
+  const P = parseFloat(document.getElementById('calcAmount').value);
+  const annualRate = parseFloat(document.getElementById('calcRate').value);
+  const n = parseInt(document.getElementById('calcTenure').value);
+
+  if (!P || !annualRate || !n) return;
+
+  const r = annualRate / (12 * 100);
+  const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const total = emi * n;
+  const interest = total - P;
+
+  const fmt = (v) => '₹ ' + Math.round(v).toLocaleString('en-IN');
+
+  document.getElementById('resEMI').textContent      = fmt(emi);
+  document.getElementById('resInterest').textContent = fmt(interest);
+  document.getElementById('resTotal').textContent    = fmt(total);
+  document.getElementById('calcResult').style.display = 'block';
+}
+// Auto-calculate on load
+calculateEMI();
+</script>
+{% endblock %}
